@@ -1,0 +1,18 @@
+#+title: IST557 Homework 1
+#+author: Andrew Sugarman
+#+date: today
+
+* Problem 1: Expected value of a sum of normal random variables
+We are given: \(y \sim \mathcal{N}(\mu, \sigma^2) \) and \( y \in \mathbb{R} \)
+To solve the expectation \( E[y_{1}+y_{2}+y_{3}+ ... y_{N}] \) given \( N \in \mathbb{R} \), we can use the linearity of expectation:
+
+\[
+
+E[y_{1}+y_{2}+y_{3}+ ... y_{N}] = E[y_{1}] + E[y_{2}] + E[y_{3}] + ... E[y_{N}]
+
+]
+
+Given that y is a Gaussian random variable with mean \mu, this expectation solves to be \(N*\mu \)
+
+* Problem 2: Conditional and Marginal Distribution of a Gaussian Heirarchical Time series
+- ref: https://www.otexts.com/fpp2/hts.html

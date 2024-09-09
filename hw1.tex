@@ -1,0 +1,40 @@
+% Created 2024-09-08 Sun 15:36
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Andrew Sugarman}
+\date{today}
+\title{IST557 Homework 1}
+\hypersetup{
+ pdfauthor={Andrew Sugarman},
+ pdftitle={IST557 Homework 1},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 29.1 (Org mode 9.7)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Problem 1: Expected value of a sum of normal random variables}
+\label{sec:org769745e}
+We are given: \(y \sim \mathcal{N}(\mu, \sigma^2)\) and \(y \in \mathbb{R}\)
+To solve the expectation \(E[y_{1}+y_{2}+y_{3}+ ... y_{N}]\) given \(N \in \mathbb{R}\), we can use the linearity of expectation:
+
+$\backslash$[
+E[y\textsubscript{1}+y\textsubscript{2}+y\textsubscript{3}+ \ldots{} y\textsubscript{N}] = E[y\textsubscript{1}] + E[y\textsubscript{2}] + E[y\textsubscript{3}] + \ldots{} E[y\textsubscript{N}]
+]
+
+Given that y is a Gaussian random variable with mean \(\mu\), this expectation solves to be \(N*\mu\)
+\end{document}

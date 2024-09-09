@@ -1,0 +1,281 @@
+% Created 2024-09-03 Tue 15:24
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{letterpaper, margin=1in}
+\author{Andrew Sugarman}
+\date{\today}
+\title{IST557 Lecture Notes}
+\hypersetup{
+ pdfauthor={Andrew Sugarman},
+ pdftitle={IST557 Lecture Notes},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 29.1 (Org mode 9.7)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{08-27-2024 - Class Introduction}
+\label{sec:org61035b2}
+\subsection{Syllabus}
+\label{sec:org08cbfbf}
+\begin{itemize}
+\item all homework based unless people cheat
+\begin{itemize}
+\item if you work together on homeworks you must report it and midterm is absolutely to be done alone
+\end{itemize}
+\item only hw + take home
+\item TA office hours 2-4pm mon and 9-11 Fri
+\end{itemize}
+\subsection{Background}
+\label{sec:org1ed9a33}
+\begin{itemize}
+\item review cholesky factor
+\begin{itemize}
+\item spend a fair bit of time over the next few days looking over linear algebra review and reference
+\item dont cheat
+\item For grading = understand the question
+\begin{itemize}
+\item more credit if you recognize the answer is wrong
+\item \textbf{no late assignments}
+\item murphy and elements of stat learning = best books
+\begin{itemize}
+\item Review of math and probability = high-yield
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\subsection{Lecture 1}
+\label{sec:orgf7202cf}
+Machine Learning Overview and context
+\begin{itemize}
+\item inference = you care about what the model has learned
+\begin{itemize}
+\item supervised learning = predict Y from X given training examples where both were known ie housing price pred problem
+\item unsupervised = predict y from x given examples where only x is known ie identify 5 groups from a dataset
+\item semi-supervised learning = y is only known for part of the training data
+\item Regression = continuous Y, classification = discrete Y
+\item Feature selection
+\begin{itemize}
+\item given Ys and Xs, figure out which covariates are the most important
+\end{itemize}
+\item Dimensionality reduction ex PCA
+\end{itemize}
+\end{itemize}
+Model representations
+\begin{itemize}
+\item Data do not fall on a line
+\item Linear Regression
+\begin{itemize}
+\item Probabilistic representation:
+Beta = vector containing m and b
+Beta = maximum likelihood of Y given beta*x and variance
+\begin{itemize}
+\item maximize prob of the data under this model
+\end{itemize}
+\item Loss representation
+\begin{itemize}
+\item find values of m and B that minimize the sum of the squared res
+\end{itemize}
+\end{itemize}
+\end{itemize}
+Black box model
+\begin{itemize}
+\item subjective label as to whether you can understand how it is working (nnet, random forest, decision tree)
+\end{itemize}
+Model evaluation
+\begin{itemize}
+\item are models any good? How do we define what good is?
+\end{itemize}
+P>>N problem = more parameters than data points
+\begin{itemize}
+\item use penalizated or bayesian regression to help solve this
+\end{itemize}
+Stats vs ml
+\begin{itemize}
+\item stats generally focuses on inference
+\end{itemize}
+Types of Data
+\begin{itemize}
+\item discrete data with more than 2 categorical levels (one of K categories)
+\begin{itemize}
+\item one hot encoding - 000, 100, 010, 001
+\item dumy encoding = new variable z that is categorical w k-1 dims
+\end{itemize}
+\item ordinal data - categorical with an order
+\item interval data - protect identity
+\item time to event data - how long to develop a condition of interest
+\begin{itemize}
+\item special + complexities with specialized models
+\end{itemize}
+\item Functional data (inf dim) measure continuous functions such as ekgs
+\item compositional data (sum constraints)
+\end{itemize}
+\section{08-29-2024 - Math and Probability Review}
+\label{sec:org0a760d7}
+\subsection{Linear Algebra}
+\label{sec:org61be2e5}
+\(A_{i,j}\) means element from ith row and jth column
+\begin{itemize}
+\item can only add matrices of same dimensions
+\item can multipy two matrices that do not have same dim
+\item For A*B, the num columns (m) in A must be same as num rows (n) in B
+\begin{itemize}
+\item The inner dimensions cancel out
+\end{itemize}
+\item Matmul is associative, distributive, and not commutative
+\item every linear transformation can be represented by a matrix
+\end{itemize}
+ONLY square matrices could be invertible, and not all matrices that are square have a unique inverse
+\begin{itemize}
+\item \(AA^-1 = A^{-1}A = I\)
+\item pseudoinverse = A\textsuperscript{dagger}: defined by \(A^t * A = I\)
+\begin{itemize}
+\item there is not a unique solution to the inverse
+\begin{itemize}
+\item pseudoinverse in python gives arb value for Adagger
+\begin{itemize}
+\item this means that sometimes there are problems with random answers if code is using pseudoinv
+\begin{itemize}
+\item R does not give you an answer if the inverse is not defined
+\item assumptions can help ie most betas are small
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\end{itemize}
+Identity matrix
+\begin{itemize}
+\item zero except for diagonal of ones
+\end{itemize}
+Diagonal matrix
+\begin{itemize}
+\item usually only well-defined for square matrices
+Diag(X) --> shorthand notation for either extracting or creating a diagonal matrix
+\end{itemize}
+Special matrices
+\begin{itemize}
+\item symmetric = equal to the transpose (such as a covariance mat)
+\item orthogonal = things that rotate or translate vectors but do not scale them
+\begin{itemize}
+\item the inv of an ortho matrix is its transpose
+\end{itemize}
+\end{itemize}
+Linear dependence
+\begin{itemize}
+\item 3 matrices on the same plane are linearly dependent and the matrix with these three vectors as rows would have rank 2
+\item span(S) is the set of all linear combinations of the elements of S
+\end{itemize}
+Rank
+\begin{itemize}
+\item \(A \element R^mxn\)
+\item Rank(A) is the max num of linearly ind columns or rows
+\end{itemize}
+Eigenvectors and Eigenvalues
+\begin{itemize}
+\item eigenvectors are usually normalized to unit length
+\item if A is symmetric then all eigenvalues r real
+\item trace of a matrix = sum of the eigenvals
+\item det(A) = product of eigenvals
+\item If X = VDV\textsuperscript{T} then:
+\(X^-1 = V * D^-1 * V^T\)
+\begin{itemize}
+\item since D is diagonal its inverse is given by just taking the inverse of each of its diag elements
+\item this is beneficial because matrix inversion is computationally expensive
+\end{itemize}
+\end{itemize}
+A symmetric Positive definite matrices have all eigenvalues strictly greater than 0
+A symmetric matrix is called pos semi definite if all eigvals are greater than 0 (but can include 0) = covariance matrices
+Matrix Square roots
+\begin{itemize}
+\item the square root of a square matrix X is defined as mat V such that X = VV\textsuperscript{T}
+\begin{itemize}
+\item eigen decomp provides means of finding such a mat V for sq mat X
+\begin{itemize}
+\item \(X^{1/2} = VD^{1/2}\)
+\end{itemize}
+\end{itemize}
+\end{itemize}
+IF X is spd (symmetric pos def)
+Cholesky decomp is faster than eigen decomp
+\begin{itemize}
+\item SPD matrix sigma has chol decomp:
+Sigma = LL\textsuperscript{T} where L is a lower triangular matrix
+\begin{itemize}
+\item TLDR Cholesky decomp for sigma = LL\textsuperscript{T} if sigma is a symmetric positive definite matrix
+\begin{itemize}
+\item upper cholesky = U\textsuperscript{T} * U
+\end{itemize}
+\end{itemize}
+\end{itemize}
+Vector norms
+Think of a norm as the length of a vector \\[0pt]
+\begin{enumerate}
+\item Euclidean norm = ||x\textsubscript{2}|| = \sqrt{sumx^2} $\backslash$
+\item L1 norm = city block norm (Lasso)
+\item p-norm = pthroot(sum of absval x\textsuperscript{p})
+\end{enumerate}
+Recall derivative = slope of tangent line, inst rate of change at a point
+The gradient = multivariate derivative
+\begin{itemize}
+\item for fn F that takes in a vector and outputs a scalar (such as a probability)
+\begin{itemize}
+\item gradient is defined as a vector
+\item nobla*f =
+\item gradient points in the direction of steepest ascent from x and -nobla(f(x)) gives direction of steepest descent
+\item this is used frequently in gradient descent
+\end{itemize}
+\end{itemize}
+Jaccobian is a matrix of first order partial derivatives (when the output is a vector) ie a generalization of the multivariate gradient
+Hessian is a matrix of second order partial derivatives
+\begin{itemize}
+\item think of this as the curvature of a function
+\item comes in handy for newtons method
+\item serves also as the basis for the Laplace Approximation to a probability density
+\end{itemize}
+Review of Optimization
+\section{09-03-2024 - Math and probability review}
+\label{sec:org33cd8ce}
+\subsection{The Eigendecomposition is ordered}
+\label{sec:orgbc039eb}
+\begin{itemize}
+\item first eigenvector has the greatest value
+\end{itemize}
+\subsection{Argmax}
+\label{sec:org5b0f38c}
+\begin{itemize}
+\item For a function
+\end{itemize}
+\subsection{Joint probability (memorize this)}
+\label{sec:org609c45e}
+\begin{itemize}
+\item factor into a conditional and a marginal
+\item \(P(A|B) = P(A|B)(P(B)) = P(B|A)(P(A))\)
+\end{itemize}
+\subsection{Conditional Probability}
+\label{sec:orgf44d677}
+\(p(B|A = 7) = P(A = 7,B) / P(A)\)
+\subsection{Expectations, the Mean, and variance}
+\label{sec:orge04c962}
+\begin{itemize}
+\item expectation = weighted avg
+\end{itemize}
+Variance is the spread about the mean - it must be positive
+\subsection{Mean and variance of finite samples}
+\label{sec:org1b8eed5}
+\(mean_^(x) = 1/N * \sum x_i\)
+\end{document}
