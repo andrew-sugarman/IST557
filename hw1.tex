@@ -1,4 +1,4 @@
-% Created 2024-09-08 Sun 15:36
+% Created 2024-09-10 Tue 00:38
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -28,13 +28,37 @@
 \tableofcontents
 
 \section{Problem 1: Expected value of a sum of normal random variables}
-\label{sec:org769745e}
-We are given: \(y \sim \mathcal{N}(\mu, \sigma^2)\) and \(y \in \mathbb{R}\)
-To solve the expectation \(E[y_{1}+y_{2}+y_{3}+ ... y_{N}]\) given \(N \in \mathbb{R}\), we can use the linearity of expectation:
+\label{sec:org66c16cf}
 
-$\backslash$[
-E[y\textsubscript{1}+y\textsubscript{2}+y\textsubscript{3}+ \ldots{} y\textsubscript{N}] = E[y\textsubscript{1}] + E[y\textsubscript{2}] + E[y\textsubscript{3}] + \ldots{} E[y\textsubscript{N}]
-]
+We are given: \(y \sim \mathcal{N}(\mu, \sigma^2)\) and \(y \in \mathbb{R}\). To solve the expectation \(E[y_{1}+y_{2}+y_{3}+ ... y_{N}]\) given \(N \in \mathbb{R}\), we can use the linearity of expectation:
 
-Given that y is a Gaussian random variable with mean \(\mu\), this expectation solves to be \(N*\mu\)
+\(\\ E[y_{1}+y_{2}+y_{3}+ ... y_{N}] = E[y_{1}] + E[y_{2}] + E[y_{3}] + ... E[y_{N}] \\\)
+
+Since y is a normally distributed random variable with mean \(\mu\), this expectation solves to be: \(N*\mu\).
+\section{Problem 2: Conditional and Marginal Distribution of a Gaussian Heirarchical Time series}
+\label{sec:org511d7cb}
+
+Refs:
+\url{https://www.otexts.com/fpp2/hts.html}
+\url{https://en.wikipedia.org/wiki/Autoregressive\_model}
+
+\begin{enumerate}
+\item The conditional distribution is normally distributed. This hierarchical time series is autoregressive, and the y\textsubscript{0} instance is distributed normal.
+\item This time series depends only on the value of the immediately prior condition (y\textsubscript{t-1}).
+\end{enumerate}
+\section{Problem 3: Gradient Descent Optimizer}
+\label{sec:orgf085e4e}
+Steps to write grad descent optimizer for pdf of students t distribution
+
+\begin{itemize}
+\item to effectively write an optimizer, we need to define a convex function
+\item with a convex function, we can pursue a gradient of 0
+\item the function given is the pdf of the student's t distribution, which maps from real space to probability space (0-1)
+\item to make the function convex and monotonic we can take the negative log likelihood of it
+\item taking the logarithm of this function simplifies it:
+\begin{itemize}
+\item the first term separates out to a constant and you are left with: \(log(studt) = const + ((v+1)/2) * log(1+((b^2)/v))\)
+\end{itemize}
+\item next, the gradient must be calculated by calculating the partial derivative with respect to b, followed by calculating the partial derivative with respect to v (constant)
+\end{itemize}
 \end{document}
