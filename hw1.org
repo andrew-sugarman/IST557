@@ -34,13 +34,13 @@ With $v>0$
 - the function given is the pdf of the student's t distribution, which maps from real space to probability space (0-1)
 - to make the function convex and monotonic we can take its negative logarithm:
 
-  \begin{multiline*}
+\begin{multiline*}
 
-  -log(f(b)) = -[\log( \frac{\Gamma((v+1) / 2)}{\sqrt(v\pi) \Gamma(v / 2)} ) + \log((1 + (b^2/v))^{ -(v+1)/2 }]\\
+-log(f(b)) = -[\log( \frac{\Gamma((v+1) / 2)}{\sqrt(v\pi) \Gamma(v / 2)} ) + \log((1 + (b^2/v))^{ -(v+1)/2 }]\\
 
-  -log(f(b)) = -[\log(\Gamma((v+1) / 2)) - \log(\sqrt(v\pi) \Gamma(v / 2)) + (-(v+1)/2) \log((1 + (b^2/v))]
+-log(f(b)) = -[\log(\Gamma((v+1) / 2)) - \log(\sqrt(v\pi) \Gamma(v / 2)) + (-(v+1)/2) \log((1 + (b^2/v))]
 
-  \end{multiline*}
+\end{multiline*}
 
 - This allows us to split from this equation a term dependent on v:
 
@@ -49,6 +49,7 @@ With $v>0$
 - Thus: \(-log(f(b) = -(a + b)\)
 - Next we set up gradient descent by calculating the partial derivative with respect to b, followed by calculating the partial derivative with respect to v (constant)
 - The partial derivative of $-log(f(b))$ with respect to b is:
+
 \begin{equation}
   \frac{\partial f(b)}{\partial b} = \frac{b(1+v)}{v+b^2}
 \end{equation}
