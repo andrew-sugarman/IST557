@@ -1,6 +1,7 @@
 #+title: IST557 Homework 1
 #+author: Andrew Sugarman
-#+date: today
+#+date: \today
+#+LATEX_HEADER: \usepackage{amsmath}
 
 * Problem 1: Expected value of a sum of normal random variables
 
@@ -20,11 +21,36 @@ https://en.wikipedia.org/wiki/Autoregressive_model
 2. This time series depends only on the value of the immediately prior condition (y_{t-1}).
 
 * Problem 3: Gradient Descent Optimizer
-Steps to write grad descent optimizer for pdf of students t distribution
+Steps to write grad descent optimizer for $f(b)$:
+
+\begin{equation}
+f(b) = \frac{\Gamma((v+1) / 2)}{\sqrt(v\pi) \Gamma(v / 2)}(1 + (b^2/v))^{-(v+1)/2}
+\end{equation}
+
+With $v>0$
 
 - to effectively write an optimizer, we need to define a convex function
-- with a convex function, we can pursue a gradient of 0
+- with a convex function, we can pursue the minimum gradient
 - the function given is the pdf of the student's t distribution, which maps from real space to probability space (0-1)
-- to make the function convex and monotonic we can take the negative log likelihood of it
-- taking the logarithm of this function simplifies it so that the first term separates out to a constant and you are left with: \( log(studt) = const + ((v+1)/2) * log(1+((b^2)/v)) \)
-- next, the gradient must be calculated by calculating the partial derivative with respect to b, followed by calculating the partial derivative with respect to v (constant)
+- to make the function convex and monotonic we can take its negative logarithm:
+
+  \begin{multiline*}
+
+  -log(f(b)) = -[\log( \frac{\Gamma((v+1) / 2)}{\sqrt(v\pi) \Gamma(v / 2)} ) + \log((1 + (b^2/v))^{ -(v+1)/2 }]\\
+
+  -log(f(b)) = -[\log(\Gamma((v+1) / 2)) - \log(\sqrt(v\pi) \Gamma(v / 2)) + (-(v+1)/2) \log((1 + (b^2/v))]
+
+  \end{multiline*}
+
+- This allows us to split from this equation a term dependent on v:
+
+  x = \( \log(\Gamma(\frac{v+1}{2})) - (1/2)\log(v\pi) - \log(\Gamma(v/2)) \) allowing us to write the term dependent on b and constant v as y = \((-(v+1)/2) \log((1 + (b^2/v)\)
+
+- Thus: \(-log(f(b) = -(a + b)\)
+- Next we set up gradient descent by calculating the partial derivative with respect to b, followed by calculating the partial derivative with respect to v (constant)
+- The partial derivative of $-log(f(b))$ with respect to b is:
+\begin{equation}
+  \frac{\partial f(b)}{\partial b} = \frac{b(1+v)}{v+b^2}
+\end{equation}
+
+- The partial derivative of the gamma function is eluding me at this time but knowing that v=3 we can solve this problem:
